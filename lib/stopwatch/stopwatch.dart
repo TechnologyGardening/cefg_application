@@ -90,6 +90,56 @@ class _StopWatchExampleState extends State<StopWatchExample> {
     });
   }
 
+  Row _buldControls() {
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      ElevatedButton(
+        onPressed: isRunning ? null : _startTimer,
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        ),
+        child: const Text('Start'),
+      ),
+      ElevatedButton(
+        onPressed: _lap,
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        ),
+        child: const Text('Lap'),
+      ),
+      ElevatedButton(
+        onPressed: _clear,
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        ),
+        child: const Text('Clear'),
+      ),
+      ElevatedButton(
+        onPressed: isRunning ? _stopTimer : null,
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        ),
+        child: const Text('Stop'),
+      ),
+    ]);
+  }
+
+  Widget _buildDisplay() {
+    return ListView(children: [
+      for (int millis in laps)
+        ListTile(
+          title: Text(
+            _milisToSecond(millis),
+          ),
+          leading: const Icon(Icons.circle),
+          trailing: const Icon(Icons.arrow_back),
+        )
+    ]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,54 +149,11 @@ class _StopWatchExampleState extends State<StopWatchExample> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Center(
-              child: Text(
-                _milisToSecond(milliseconds),
-                style: const TextStyle(fontSize: 30),
-              ),
-            ),
+            Expanded(child: _buildCounter(context)),
             const SizedBox(height: 20),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              ElevatedButton(
-                onPressed: isRunning ? null : _startTimer,
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.green),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                ),
-                child: const Text('Start'),
-              ),
-              ElevatedButton(
-                onPressed: _lap,
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.orange),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                ),
-                child: const Text('Lap'),
-              ),
-              ElevatedButton(
-                onPressed: _clear,
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                ),
-                child: const Text('Clear'),
-              ),
-              ElevatedButton(
-                onPressed: isRunning ? _stopTimer : null,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                ),
-                child: const Text('Stop'),
-              ),
-            ]),
+            Expanded(child: _buldControls()),
+            const SizedBox(height: 20),
+            Expanded(child: _buildDisplay()),
           ],
         ));
   }
