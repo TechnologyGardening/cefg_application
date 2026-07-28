@@ -1,3 +1,4 @@
+import 'package:cefg_application/calculatorlayout/cal_layout.dart';
 import 'package:cefg_application/stopwatch/stopwatch.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class StopwatchRun extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: StopWatchExample(),
+      home: Calexample(),
     );
   }
 }

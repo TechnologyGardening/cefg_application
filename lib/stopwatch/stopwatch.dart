@@ -103,9 +103,13 @@ class _StopWatchExampleState extends State<StopWatchExample> {
       ElevatedButton(
         onPressed: _lap,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        ),
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            )),
         child: const Text('Lap'),
       ),
       ElevatedButton(
@@ -140,6 +144,24 @@ class _StopWatchExampleState extends State<StopWatchExample> {
     ]);
   }
 
+  Widget _buildListViewBuilder() {
+    return ListView.builder(
+        itemCount: laps.length,
+        itemBuilder: (context, index) {
+          final millis = laps[index];
+          return ListTile(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 10,
+            ),
+            title: Text('Lap ${index + 1}'),
+            trailing: Text(
+              _milisToSecond(millis),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -153,7 +175,7 @@ class _StopWatchExampleState extends State<StopWatchExample> {
             const SizedBox(height: 20),
             Expanded(child: _buldControls()),
             const SizedBox(height: 20),
-            Expanded(child: _buildDisplay()),
+            Expanded(child: _buildListViewBuilder()),
           ],
         ));
   }
