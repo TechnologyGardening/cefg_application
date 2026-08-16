@@ -20,10 +20,10 @@ class _CalexampleState extends State<Calexample> {
     return Container(
       color: const Color.fromARGB(255, 255, 255, 255),
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const Expanded(
+        Expanded(
           child: Row(
             children: [
-              Text("Data"),
+              Text(output1),
             ],
           ),
         ),
