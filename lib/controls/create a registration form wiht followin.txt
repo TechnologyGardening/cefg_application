@@ -1,0 +1,13 @@
+create a registration form wiht followinf fields
+1. User Name         (validation ) St Ct
+2. Email             (validation) St Ct
+3. Password          (validate 10 char, 3 capital, 3 small, 2 numbers, 2 special char) St Ct
+4. Re-enter password (validate with password) St Ct
+5. Gender            (Radio - Male / Female) St
+6. Qualification     (Checkbox - 10th, 12th, Graduate) St 
+7. City               (Dropdown -  City1, City2, City3) St
+8. Height             (Slider 48 inch to 84 inch) St
+9. Date of Birth       (Date time picker) St
+10. Submit Button
+When user click on Submit button, validate all data and redirect user to next widget
+Display all user entered information into next widget.
